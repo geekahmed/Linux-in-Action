@@ -1,5 +1,6 @@
 
 
+
 This is my summary of the Linux in Axction, by David Clinton. This book is considered a great introduction to linux adminstartion with practical exercises as found in the real-world projects.
 
 Contributions: Issues, comments and pull requests are super welcome 😃
@@ -31,6 +32,12 @@ Contributions: Issues, comments and pull requests are super welcome 😃
 	- [5.-Archiving partitions with dd]()
 	- [6.-Synchronizing archives with rsync]()
 	- [7.-Planning considerations]()
+- [Chapter 5. Automated administration: Configuring automated offsite backups](#Chapter-5-Automated-administration-Configuring-automated-offsite-backups)
+	- [1.-Scripting with Bash]()
+	- [2.-Backing up data to AWS S3]()
+	- [3.-Scheduling regular backups with cron]()
+	- [4.-Scheduling irregular backups with anacron]()
+	- [5.-Scheduling regular backups with systemd timers]()
 <!-- /TOC -->
 
 # Chapter 1. Welcome to Linux
@@ -214,3 +221,20 @@ Contributions: Issues, comments and pull requests are super welcome 😃
 - `dd if=/dev/sda2 of=/home/username/partition2.img` creates an image of the sda2 partition and saves it to your home directory.
 - `dd if=/dev/urandom of=/dev/sda1` overwrites a partition with random characters to obscure the old data.
 - `rsync -av * username@10.0.3.141:syncdirectory` synchronizes recursively a folder in remote machine with local one.
+
+# Chapter 5. Automated administration: Configuring automated offsite backups
+## Section 1: Scripting with Bash
+- A linux script is a plain text file containing one or more commands compliant with Bash.
+	- Important in creating executable routines that can rival programming languages in complexity and versatility.
+- The # charavter in shell scripting introduces a comment that wouldn't be read by the interpreter.
+	- Using ! character besides the # character will make the interpreter read the value of the comment (shebang line).
+- Exit codes are passed when a Linux command completes. A 0 will be pased to indicate success, whereas different numbers can be configured to specify some kind of error.
+- Cron, by default, will always run as root.
+- Scripts saved to the /etc/cron.daily/ directory will be executed each day.
+## Section 2: Backing up data to AWS S3
+## Section 3: Scheduling regular backups with cron
+## Section 4: Scheduling irregular backups with anacron
+## Section 5: Scheduling regular backups with systemd timers
+## Security best practices
+## Command-line review
+
