@@ -1,6 +1,7 @@
 
 
 
+
 This is my summary of the Linux in Axction, by David Clinton. This book is considered a great introduction to linux adminstartion with practical exercises as found in the real-world projects.
 
 Contributions: Issues, comments and pull requests are super welcome 😃
@@ -224,17 +225,44 @@ Contributions: Issues, comments and pull requests are super welcome 😃
 
 # Chapter 5. Automated administration: Configuring automated offsite backups
 ## Section 1: Scripting with Bash
-- A linux script is a plain text file containing one or more commands compliant with Bash.
+ - A linux script is a plain text file containing one or more commands compliant with Bash.
 	- Important in creating executable routines that can rival programming languages in complexity and versatility.
-- The # charavter in shell scripting introduces a comment that wouldn't be read by the interpreter.
+ - The # charavter in shell scripting introduces a comment that wouldn't be read by the interpreter.
 	- Using ! character besides the # character will make the interpreter read the value of the comment (shebang line).
-- Exit codes are passed when a Linux command completes. A 0 will be pased to indicate success, whereas different numbers can be configured to specify some kind of error.
-- Cron, by default, will always run as root.
-- Scripts saved to the /etc/cron.daily/ directory will be executed each day.
+ - Exit codes are passed when a Linux command completes. A 0 will be pased to indicate success, whereas different numbers can be configured to specify some kind of error.
+ - Cron, by default, will always run as root.
+ - Scripts saved to the /etc/cron.daily/ directory will be executed each day.
 ## Section 2: Backing up data to AWS S3
-## Section 3: Scheduling regular backups with cron
-## Section 4: Scheduling irregular backups with anacron
-## Section 5: Scheduling regular backups with systemd timers
-## Security best practices
-## Command-line review
+ - AWS S3 is widely used between Linux administrators.
+ - AWS CLI is used to interact with AWS from the terminal.
+ - `aws configure` command is used to add the account credentials.
+ - `aws s3 ls` command is used to show all  S3 buckets in the aws account.
+ - A new s3 bucket is creates using `aws s3 mb "name of the bucket"`
+	- The bucket name should be unique in the entire S3 system.
+ - `aws sync sourcePath s3://"bucket name"` command is used to backup files and directories to the S3 bucket and is similar to rsync.
+ - To write backup using shell scripting
 
+    #!/bin/bash
+    /usr/local/bin/aws s3 sync /home/geekahmed/test s3://geekahmed12345
+ - `whereis aws` command is used to find the location of aws cli.
+## Section 3: Scheduling regular backups with cron
+ - Copying an executable script to one of the /etc/cron.? directories causes it to be run at the appropriate interval.
+## Section 4: Scheduling irregular backups with anacron
+ - Adding a directive to the anacrontab file executes commands relative to system boots, rather than at absolute times.
+## Section 5: Scheduling regular backups with systemd timers
+ - systemd timers can be set to run based on both absolute time and in reaction to system events, like changes to hardware states.
+## Security best practices
+ - Lock down your system accounts (like syslog and, ideally, even root) to prevent their being used for remote logins.
+ - Include off-site backups in your security planning, which adds another layer of data reliability.
+ - Always protect your (AWS) access keys, not to mention passwords and encryption key pairs, from public exposure of any kind.
+## Command-line review
+ - `#!/bin/bash` (the so-called “shebang line”) tells Linux which shell interpreter you’re going to be using for a script.
+ - `||` inserts an or condition into a script. Think of this as either “the command to the left is successul” or “execute the command to the right.”
+ - `&&` - inserts an and condition into a script. Think of this as “if the command to the left is successful” and “execute the command to the right.”
+ - `test -f /etc/filename` tests for the existence of the specified file or directory name.
+ - `chmod +x upgrade.sh` makes a script file executable.
+ - `pip3 install --upgrade --user awscli` installs the AWS command-line interface using Python’s pip package manager.
+ - `aws s3 sync /home/username/dir2backup s3://linux-bucket3040` synchronizes the contents of a local directory with the specified S3 bucket.
+ - `21 5 * * 1 root apt update && apt upgrade` (a cron directive) executes two apt commands at 5:21 each morning.
+ - `NOW=$(date +"%m_%d_%Y")` assigns the current date to a script variable.
+ - `systemctl start site-backup.timer` activates a systemd system timer.
