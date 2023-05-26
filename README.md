@@ -1,44 +1,40 @@
+# Linux in Action
 
-
-
-
-This is my summary of the Linux in Axction, by David Clinton. This book is considered a great introduction to linux adminstartion with practical exercises as found in the real-world projects.
+This is my summary of the Linux in Action, by David Clinton. This book is considered a great introduction to linux adminstartion with practical exercises as found in the real-world projects.
 
 Contributions: Issues, comments and pull requests are super welcome 😃
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 # Table of Contents
+- [Linux in Action](#linux-in-action)
 - [Table of Contents](#table-of-contents)
-- [Chapter 1. Welcome to Linux]()
-	- [1.-What makes Linux different from other operarting systems]()
-	- [2.-Basic survival skills]()
-	- [3.-Getting help]()
-- [Chapter 2. Linux virtualization: Building a Linux working environment]()
-	- [1.-What is virtualization?]()
-	- [2.-Working with VirtualBox]()
-	- [3.-Working with Linux containers (LXC)]()
-- [Chapter 3. Remote connectivity: Safely accessing networked machines](#Chapter-3-Remote-connectivity-Safely-accessing-networked-machines)
-	- [1.-The importance of encryption]()
-	- [2.-Getting started with OpenSSH]()
-	- [3.-Logging in to a remote server with SSH]()
-	- [4.-Password-free SSH access]()
-	- [5.-Safely copying files with SCP]()
-	- [6.-Using remote graphic programs over SSH connections]()
-	- [7.-Linux process management]()
-- [Chapter 4. Archive management: Backing up or copying entire file systems](#Chapter-4-Archive-management-Backing-up-or-copying-entire-file-systems)
-	- [1.-Why archive?]()
-	- [2.-What to archive]()
-	- [3.-Where to back up]()
-	- [4.-Archiving files and file systems using tar]()
-	- [5.-Archiving partitions with dd]()
-	- [6.-Synchronizing archives with rsync]()
-	- [7.-Planning considerations]()
-- [Chapter 5. Automated administration: Configuring automated offsite backups](#Chapter-5-Automated-administration-Configuring-automated-offsite-backups)
-	- [1.-Scripting with Bash]()
-	- [2.-Backing up data to AWS S3]()
-	- [3.-Scheduling regular backups with cron]()
-	- [4.-Scheduling irregular backups with anacron]()
-	- [5.-Scheduling regular backups with systemd timers]()
+- [Chapter 1. Welcome to Linux](#chapter-1-welcome-to-linux)
+- [Chapter 2. Linux virtualization: Building a Linux working environment](#chapter-2-linux-virtualization-building-a-linux-working-environment)
+- [Chapter 3. Remote connectivity: Safely accessing networked machines](#chapter-3-remote-connectivity-safely-accessing-networked-machines)
+	- [Section 4: Password-free SSH access](#section-4-password-free-ssh-access)
+	- [Section 5: Safely copying files with SCP](#section-5-safely-copying-files-with-scp)
+	- [Section 6: Using remote graphic programs over SSH connections](#section-6-using-remote-graphic-programs-over-ssh-connections)
+	- [Section 7: Linux process management](#section-7-linux-process-management)
+	- [Security best practices](#security-best-practices)
+	- [Command-line review](#command-line-review)
+- [Chapter 4. Archive management: Backing up or copying entire file systems](#chapter-4-archive-management-backing-up-or-copying-entire-file-systems)
+	- [Section 1: Why archive?](#section-1-why-archive)
+	- [Section 2: What to archive?](#section-2-what-to-archive)
+	- [Section 3: Where to back up?](#section-3-where-to-back-up)
+	- [Section 4: Archiving files and file systems using tar](#section-4-archiving-files-and-file-systems-using-tar)
+	- [Section 5: Archiving partitions with dd](#section-5-archiving-partitions-with-dd)
+	- [Section 6: Synchronizing archives with rsync](#section-6-synchronizing-archives-with-rsync)
+	- [Section 7: Planning considerations](#section-7-planning-considerations)
+	- [Security best practices](#security-best-practices-1)
+	- [Command-line review](#command-line-review-1)
+- [Chapter 5. Automated administration: Configuring automated offsite backups](#chapter-5-automated-administration-configuring-automated-offsite-backups)
+	- [Section 1: Scripting with Bash](#section-1-scripting-with-bash)
+	- [Section 2: Backing up data to AWS S3](#section-2-backing-up-data-to-aws-s3)
+	- [Section 3: Scheduling regular backups with cron](#section-3-scheduling-regular-backups-with-cron)
+	- [Section 4: Scheduling irregular backups with anacron](#section-4-scheduling-irregular-backups-with-anacron)
+	- [Section 5: Scheduling regular backups with systemd timers](#section-5-scheduling-regular-backups-with-systemd-timers)
+	- [Security best practices](#security-best-practices-2)
+	- [Command-line review](#command-line-review-2)
 <!-- /TOC -->
 
 # Chapter 1. Welcome to Linux
