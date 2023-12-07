@@ -38,7 +38,23 @@ Contributions: Issues, comments and pull requests are super welcome 😃
 <!-- /TOC -->
 
 # Chapter 1. Welcome to Linux
-
+- Linux use pseudo file systems to expose data on the hardware environment to processes and users.
+- Authorized users can invoke `sudo` to gain administration persmissions for individual commands.
+- A file system is made up of data files indexed in a way that allows the perception of a directory-based organization.
+- A process is an active instance of a running software program.
+- A disk partition is the logical devision of a physical storage device that can be made to work excatly like a standalone device.
+- Bash is a command-line user interface for executing system actions.
+- Plain text that is usable for administration purposes is text made up of a limited set of characters and contains no extraneous formatting code.
+- File globbing involves using wildcard characters to refer to multiple files with a single command.
+- Tab completion employs the Tab key to suggest possible completions of a partially typed command.
+- Pseudo file systems are directories containing files with dynamic data automatically generated at or after system boot.
+- Avoid working on linux machine as the root user. Use a regular user account instead, and, when you need to perform administation tasks, use `sudo`.
+- `ls -lh /var/log` lists the contents and full, human-friendly details of the `/var/log` directory.
+- `cd` returns you to your home directory.
+- `cp file1 newdir` copies a file called `file1` to the directory named `newdir`.
+- `mv file? /some/other/directory/` moves all files containing the letter `file` and one more character to the target location.
+- `rm -r *` deletes all files and directories beneath the current location.
+- `man sudo` opens the man documentation file on using `sudo` with commands.
 # Chapter 2. Linux virtualization: Building a Linux working environment
 
 # Chapter 3. Remote connectivity: Safely accessing networked machines
