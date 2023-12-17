@@ -57,6 +57,45 @@ Contributions: Issues, comments and pull requests are super welcome 😃
 - `man sudo` opens the man documentation file on using `sudo` with commands.
 # Chapter 2. Linux virtualization: Building a Linux working environment
 
+- Hypervisors like VirtualBox provide an environment where virtual operating systems can safely access hardware resources, whereas lightweight containers share their host’s software kernel.
+- Linux package managers like APT and RPM (Yum) oversee the installation and administration of software from curated online repositories using regularly updated index that mirrors the state of the remote repository.
+- Getting a VM going in VirtualBox requires defining its virtual hardware environment, downloading an OS image, and installing the OS on your VM.
+- You can easily clone, share, and administer VirtualBox VMs from the command line.
+- LXC containers are built on predefined, distribution-based templates.
+- LXC data is stored within the host file system, making it easy to administer containers.
+- Virtualization is the logical sharing of compute, storage, and networking resources among multiple processes, allowing each to run as if it was a standalone physical computer.
+- A hypervisor is software running on a host machine that exposes system resources to a guest layer, allowing the launching and administration of full-stack guest VMs.
+- A container is a VM that, instead of full-stack, lives on top of (and shares) the host machine’s core OS kernel. Containers are extremely easy to launch and kill, according to short-term need.
+- A dynamically allocated virtual drive in VirtualBox takes up only as much space on your physical drives as the VM actually uses. A fixed-size disk, by contrast, takes up the maximum space no matter how much data is there.
+- A software repository is a location where digital resources can be stored. Repositories are particularly useful for collaboration and distribution of software packages.
+- Allowing an official package manager to install and maintain the software on your Linux system is preferred over doing it manually. Online repositories are much more secure, and downloading is properly encrypted.
+- Always scan the checksum hashes of downloaded files against the correct hash strings, not only because packages can be corrupted during download, but because they can also sometimes be switched by man-in-the-middle attackers.
+- `apt install virtualbox` uses APT to install a software package from a remote repository.
+- `dpkg -i skypeforlinuz-64.deb` directly installs a downloaded Debian package on a Ubuntu machine.
+- `wget https://example.com/document-to-download` uses the wget command- line program to download a file.
+- `dnf update` , `yum update` , or `apt update` syncs the local software index with what’s available from online repositories.
+- `shasum ubuntu-16.04.2-server-amd64.iso` calculates the checksum for a
+downloaded file to confirm that it matches the provided value. This means that the contents haven’t been corrupted in transit.
+- `vboxmanage clonevm Kali-Linux-template --name newkali` uses the vboxmanage tool to clone an existing VM.
+- `lxc-start -d -n myContainer` starts an existing LXC container.
+- `ip addr` displays information on each of a system’s network interfaces (including their IP addresses).
+- `exit` leaves a shell session without shutting down the machine.
+- `shutdown -h now` It shutdowns the operating system immediately.
+- `sudo su` makes the shell in the sudo mode to write the commands that needs `sudo` without writing `sudo` everytime.
+- By default, `/var/lib/lxc/` directory contains the container's file system.
+- The backslash character (\\) can be used to conveniently break a long command into multiple lines on the command line.
+-  `APT` systems let you directly search for the availability of packages using `apt search` command.
+-  The package manager, which comes with Linux by default, has a number of jobs:
+   -  Maintain a local index to track repositories and their contents.
+   -  Tracks the status of all the software that's installed on your local machine.
+   -  Ensures that all available updates are applied to installed software.
+   -  Ensures that software dependencies are met for new applications before they are installed.
+   -  Handles installing and removing softwar packages.
+-  Here are some basic guidelines for choosing virtualization technologies:
+   -  Full-sized hypervisors like Xen and KVM are normally used for enterprise-sized deployments involving large fleets of Linux VMs.
+   -  VirtualBox and VMWare's Player are perfect for testing and experimenting with live operating systems, on or two at a time, without the need to install them to actual PCs. Their relatively high overhead makes them unsuitable for most production environments.
+   -  Container technologies like LXC and Docker are lightweight and can be provisioned and launched in mere seconds.
+  
 # Chapter 3. Remote connectivity: Safely accessing networked machines
 ## Section 4: Password-free SSH access
 
