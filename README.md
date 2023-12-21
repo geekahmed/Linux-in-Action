@@ -11,6 +11,9 @@ Contributions: Issues, comments and pull requests are super welcome 😃
 - [Chapter 1. Welcome to Linux](#chapter-1-welcome-to-linux)
 - [Chapter 2. Linux virtualization: Building a Linux working environment](#chapter-2-linux-virtualization-building-a-linux-working-environment)
 - [Chapter 3. Remote connectivity: Safely accessing networked machines](#chapter-3-remote-connectivity-safely-accessing-networked-machines)
+    - [Section 1: The importance of encryption](#section-1-the-importance-of-encryption)
+    - [Section 2: Getting started with OpenSSH](#section-2-getting-started-with-openssh)
+    - [Section 3: Logging in to a remote server with SSH](#section-3-logging-in-to-a-remote-server-with-ssh)
 	- [Section 4: Password-free SSH access](#section-4-password-free-ssh-access)
 	- [Section 5: Safely copying files with SCP](#section-5-safely-copying-files-with-scp)
 	- [Section 6: Using remote graphic programs over SSH connections](#section-6-using-remote-graphic-programs-over-ssh-connections)
@@ -97,81 +100,105 @@ downloaded file to confirm that it matches the provided value. This means that t
    -  Container technologies like LXC and Docker are lightweight and can be provisioned and launched in mere seconds.
   
 # Chapter 3. Remote connectivity: Safely accessing networked machines
+## Section 1: The importance of encryption
+- Telnet is a network protocol used on the Internet or local area networks to provide a bidirectional interactive text-oriented communication facility using a virtual terminal connection. It was historically one of the earliest methods for remote terminal access to computers and networking devices.
+- Telnet Protocol: Telnet uses the Telnet protocol to establish a connection between a client (local machine) and a server (remote machine) over a TCP/IP network. 
+  - It establishes the connection using port 23 or 2323.
+- Client-Server Model: Telnet follows a client-server model. The client initiates a connection to the server, and once the connection is established, the server provides a virtual terminal on the client's machine.
+- Text Transmission: Telnet transmits data, including keyboard input and output, in plain text. It is a simple, text-oriented protocol without encryption or security features.
+- Remote Terminal Access: One of the primary use cases for Telnet is remote terminal access. It allows users to log in to a remote system as if they were physically present at that system's terminal.
+- Network Configuration and Troubleshooting: Telnet is often used for configuring and troubleshooting network devices, such as routers and switches. It allows network administrators to connect to these devices remotely and make configuration changes.
+- Testing Network Services: Telnet is used to test the accessibility of network services such as web servers, mail servers, and FTP servers. For example, you can use Telnet to check if a web server is responding by connecting to it on port 80.
+- Unencrypted Communication: Telnet transmits data in plain text, including usernames and passwords. This lack of encryption poses a security risk, especially when used over untrusted networks like the Internet.
+- SSH (Secure Shell): Due to security concerns with Telnet, Secure Shell (SSH) has largely replaced Telnet for remote terminal access. SSH encrypts the communication between the client and server, providing a more secure alternative.
+- An encryption key is a small file containing random sequence of characters. This key can be applied as part of an encryption algorithm to convert plain text, readable data into what amounts to total gibberish.
+  - The encryption key can be used to reverse this operation and decrypt the data to its real meaning.
+
+## Section 2: Getting Started with OpenSSH
+- The `dpkg` command-line tool manages and quries software packages that are part of the Advanced Package Tool (APT) system.
+  - Running `dpkg` with `-s` flag and the name of the package returns the current installed and update status.
+- The server version of the openssh includes all the tools in the client package.
+
+## Section 3: Logging in to a remote server with SSH
+
+- `ping {ip}` is used to check if two computers can talk to each other.
+
+
 ## Section 4: Password-free SSH access
 
  - Passwords are not the best choice for protection as they are either
     too short and/or easy to guess.
  - AWS disables password authentication by default on their cloud
     instances.
+ - `/etc/ssh/sshd_config` is the configuration file whose settings control how remote clients will be able to log in to youe machine.
+ - `/etc/ssh/ssh_config` is the configuration file whose settings control how users in this machine will log in to remote hosts as clients. 
  - You can enable password-free SSH access by sharing the public key of a key pair.
- - A password is a string of regular characters, while a passphrase can
-    include spaces and punctuation.
- - ssh-keygen program is used in generating public/private key pair.
- - The fingerprint and randomart are used in prevening
-    man-in-the-middle attacks.
- - Besides RAS, OpenSSH supports the ECDSA and ED25519 signature
-    algorithms.
- - Passwordless SSH access does not work until copying the public key
-    over to the host.
+ - A password is a string of regular characters, while a passphrase can include spaces and punctuation.
+ - `ssh-keygen` program is used in generating public/private key pair.
+ - The fingerprint and randomart are used in preventing man-in-the-middle attacks.
+ - Besides RSA, OpenSSH supports the ECDSA and ED25519 signature algorithms.
+ - Public and private keys are a fundamental concept in asymmetric cryptography, which is widely used for secure communication and digital signatures. 
+ - It doesn't matter where a key pair was generated as long as the client has access to a copy of the private key, and the server holds a copy of the public key.
+   - It is generally safer tp generate key pairs on the client, as the private keys never have to be copied across the network.
+ - Passwordless SSH access does not work until copying the public key over to the host.
 	 - The Mechanism of the last point
 		 - Generate key pair (Client PC).
 		 - Transfer public key to host.
 		 - Private key used to sign a challenge and generate a message.
 		 - Message transfered to host PC
 		 - Message authenticity verified using public key, and access is granted
- - We could build different collections of key for different hosts and
-     specify a key to ssh using -i flag and providing the private key
-     path
+ - We could build different collections of key for different hosts and specify a key to ssh using `-i` flag and providing the private key path.
+   - `ssh -i .ssh/myKey.pem ubutu@192.168.2.2` 
 ## Section 5: Safely copying files with SCP
  - The cp command is not suitable for copying files accross network as the file contents  would be exposed to anyone else who happened to be hanging around the network that day, or anyone who happened to be browsing through network log data some time later.
  - The SCP program copies files of any sort hither and yon using the SSH protocol for file transfer, relying on all the same keys, passwords, and passphrases.
- - The ssh-copy-id command is used to safely copy the public key to a remote host.
+ - The `ssh-copy-id` command is used to safely copy the public key to a remote host.
+ - `rsync` is a widely used command-line utility for data synchronization and file transfer between systems. 
+ - The difference between `scp` and `rsync` is mainly about the effieciency of file transfers.
 ## Section 6: Using remote graphic programs over SSH connections
  - The OpenSSH package also allows for secure file copying and remote
      graphic sessions.
  - X11 forwarding allows graphic programs to be run over a remote
      connection.
 ## Section 7: Linux process management
- - On most modern Linux distributions, processes are managed by
-     systemd through the systemctl tool.
+ - A process is an instance of a running software program.
+ - An operating system is a tool for organizing and managing those instances/processes to effectively use a computer's hardware resources.
+ - The first process to wake up and get everything else going when a Linux compuer boots is called init.
+ - A parent shell is shell environment from within which new (child) shells can subsequently be launched and through which programs run.
+ - `pstree -p` visualizes parent and child shells/processes.
+ - The `file` command in Linux is used to determine the type of a file.
+ - `systemd` primary role is to control the ways individual processes are born, live their lives, and then die.
+ - On most modern Linux distributions, processes are managed by systemd through the systemctl tool.
  - You can pipe data between commands using the | (pipe) character and filter streaming data with grep.
- - A Linux process is all the ongoing activity that’s associated with
-     a single running program.
- - A shell is a terminal environment that provides a command-line
-     interpreter (like Bash) to allow a user to execute commands. When
-     you’re working from a Linux desktop PC or laptop, you’ll generally
-     access a shell by opening a terminal program (like GNOME Terminal).
- - A parent shell is an initial environment, from within which new
-     child shells can subsequently be launched and through which
-     programs run. A shell is, for all intents and purposes, also a
-     process.
+ - A Linux process is all the ongoing activity that’s associated with a single running program.
+ - A shell is a terminal environment that provides a command-line interpreter (like Bash) to allow a user to execute commands. When you’re working from a Linux desktop PC or laptop, you’ll generally access a shell by opening a terminal program (like GNOME Terminal).
+ - A parent shell is an initial environment, from within which new child shells can subsequently be launched and through which programs run. A shell is, for all intents and purposes, also a process.
 ## Security best practices
  - Always encrypt remote login sessions running over a public network.
  - Avoid relying on passwords alone; like people, they’re fallible.
- - Key-based, passwordless SSH sessions are preferable to simple
-   password logins.
+ - Key-based, passwordless SSH sessions are preferable to simple password logins.
  - Never transfer files across public networks in plain text.
 ## Command-line review
- - dpkg -s openssh-client checks the status of an APT-based software
+ - `dpkg -s openssh-client` checks the status of an APT-based software
    package.
- - systemctl status ssh checks the status of a system process (systemd).
- - systemctl start ssh starts a service.
- - ip addr lists all the network interfaces on a computer.
- - ssh-keygen generates a new pair of SSH keys.
- - $ cat .ssh/id_rsa.pub | ssh ubuntu@10.0.3.142 "cat >>
-   .ssh/authorized_keys" copies a local key and pastes it on a remote
+ - `systemctl status ssh` checks the status of a system process (systemd).
+ - `systemctl start ssh` starts a service.
+ - `ip addr` lists all the network interfaces on a computer.
+ - `ssh-keygen` generates a new pair of SSH keys.
+ - `cat .ssh/id_rsa.pub | ssh ubuntu@10.0.3.142 "cat >>
+   .ssh/authorized_keys"` copies a local key and pastes it on a remote
    machine.
- - ssh-copy-id -i .ssh/id_rsa.pub ubuntu@10.0.3.142 safely copies
+ - `ssh-copy-id -i .ssh/id_rsa.pub ubuntu@10.0.3.142` safely copies
    encryption keys (recommended and standard).
- - ssh -i .ssh/mykey.pem ubuntu@10.0.3.142 specifies a particular key
+ - `ssh -i .ssh/mykey.pem ubuntu@10.0.3.142` specifies a particular key
    pair.
- - scp myfile ubuntu@10.0.3.142:/home/ubuntu/myfile safely copies a
+ - `scp myfile ubuntu@10.0.3.142:/home/ubuntu/myfile` safely copies a
    local file to a remote computer.
- - ssh -X ubuntu@10.0.3.142 allows you to log in to a remote host for
+ - `ssh -X ubuntu@10.0.3.142` allows you to log in to a remote host for
    graphics-enabled session.
- - ps -ef | grep init displays all currently running system processes
+ - `ps -ef | grep init` displays all currently running system processes
    and filters results using the string init.
- - pstree -p displays all currently running system processes in a visual
+ - `pstree -p` displays all currently running system processes in a visual
    tree format.
 
 # Chapter 4. Archive management: Backing up or copying entire file systems
